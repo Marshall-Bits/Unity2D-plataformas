@@ -8,13 +8,12 @@ public class player : MonoBehaviour
    [SerializeField] float jumpSpeed = 5;
    Rigidbody2D rigidbody;
    Collider2D collider;
-   SpriteRenderer spriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
       rigidbody = gameObject.GetComponent<Rigidbody2D>();
       collider = gameObject.GetComponent<Collider2D>();
-      spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -22,7 +21,6 @@ public class player : MonoBehaviour
     {
          Run();  
          Jump();
-         FlipSprite();
     }
 
     private void Run()
@@ -33,22 +31,10 @@ public class player : MonoBehaviour
     
     private void Jump()
     {
-       if(!collider.IsTouchingLayers(LayerMask.GetMask("ground"))){return;}
        if(Input.GetButton("Jump"))
        {
          rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpSpeed);
        }
     }
 
-   private void FlipSprite()
-   {
-      if(rigidbody.velocity.x < 0)
-      {
-         spriteRenderer.flipX = true;
-      }
-      else if(rigidbody.velocity.x > 0)
-      {
-          spriteRenderer.flipX = false;
-      }
-   }
 }
